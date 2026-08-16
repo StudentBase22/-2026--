@@ -1,0 +1,1748 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ملخص الريادة والابتكار</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
+            background-attachment: fixed;
+            background-size: cover;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            color: #ffffff;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        html {
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        /* Password Modal */
+        .password-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            backdrop-filter: blur(10px);
+        }
+
+        .password-modal.hidden {
+            display: none;
+        }
+
+        .password-card {
+            background: linear-gradient(145deg, rgba(20, 20, 40, 0.95), rgba(10, 10, 30, 0.95));
+            border: 2px solid rgba(0, 212, 255, 0.5);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.3);
+        }
+
+        .password-card h2 {
+            color: #00d4ff;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .password-card .icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #00d4ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1.1rem;
+            font-family: 'Cairo', sans-serif;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .password-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .password-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            border: none;
+            border-radius: 10px;
+            color: #0a0a0a;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .password-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+        }
+
+        .password-error {
+            color: #ff4757;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .password-error.show {
+            display: block;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: none;
+            min-height: calc(100vh - 200px);
+        }
+
+        .main-content.show {
+            display: block;
+        }
+
+        /* Neon Effects */
+        .neon-glow {
+            text-shadow: 
+                0 0 5px #00d4ff,
+                0 0 10px #00d4ff,
+                0 0 20px #00d4ff,
+                0 0 40px #00d4ff;
+        }
+
+        .neon-border {
+            box-shadow: 
+                0 0 5px #00d4ff,
+                0 0 10px #00d4ff,
+                inset 0 0 5px rgba(0, 212, 255, 0.1);
+        }
+
+        .neon-pink {
+            text-shadow: 
+                0 0 5px #ff00ff,
+                0 0 10px #ff00ff,
+                0 0 20px #ff00ff;
+        }
+
+        .neon-green {
+            text-shadow: 
+                0 0 5px #00ff88,
+                0 0 10px #00ff88,
+                0 0 20px #00ff88;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(180deg, rgba(0, 212, 255, 0.1) 0%, transparent 100%);
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+            position: relative;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00d4ff, #ff00ff, #00d4ff, transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #00d4ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: #888;
+            font-weight: 300;
+        }
+
+        /* Navigation Tabs */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1.5rem 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 0.8rem 1.5rem;
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid #00d4ff;
+            color: #00d4ff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-family: 'Cairo', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .tab-btn:hover::before {
+            left: 100%;
+        }
+
+        .tab-btn:hover {
+            background: rgba(0, 212, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            color: #0a0a0a;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.7);
+        }
+
+        /* Content Container */
+        .content-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: linear-gradient(145deg, rgba(20, 20, 40, 0.9), rgba(10, 10, 30, 0.9));
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 20px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #00d4ff, #ff00ff);
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff00ff, #00d4ff);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 
+                0 20px 40px rgba(0, 212, 255, 0.2),
+                0 0 30px rgba(255, 0, 255, 0.1);
+            border-color: rgba(0, 212, 255, 0.6);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+            background: linear-gradient(135deg, #00d4ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: #00d4ff;
+        }
+
+        .card-content {
+            color: #ccc;
+            line-height: 1.8;
+            font-size: 0.9rem;
+        }
+
+        .card-content strong {
+            color: #ff00ff;
+            font-weight: 600;
+        }
+
+        .card-content ul {
+            list-style: none;
+            padding-right: 1.5rem;
+        }
+
+        .card-content li {
+            position: relative;
+            margin-bottom: 0.5rem;
+            padding-right: 1.5rem;
+        }
+
+        .card-content li::before {
+            content: '▸';
+            position: absolute;
+            right: 0;
+            color: #00d4ff;
+            font-weight: bold;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin: 2rem 0 1.5rem;
+            position: relative;
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #00d4ff;
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 50px;
+            border: 2px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .section-header::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ff00ff, transparent);
+        }
+
+        /* Quiz Styles - Single Question View */
+        .quiz-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .quiz-progress {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .quiz-progress-info {
+            font-size: 1rem;
+            color: #00d4ff;
+            font-weight: 600;
+        }
+
+        .quiz-progress-bar {
+            flex: 1;
+            height: 8px;
+            background: rgba(0, 212, 255, 0.2);
+            border-radius: 4px;
+            margin: 0 1rem;
+            overflow: hidden;
+        }
+
+        .quiz-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00d4ff, #ff00ff);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .quiz-score {
+            font-size: 1rem;
+            color: #00ff88;
+            font-weight: 600;
+        }
+
+        .quiz-card {
+            background: linear-gradient(145deg, rgba(20, 20, 40, 0.9), rgba(10, 10, 30, 0.9));
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .quiz-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #00d4ff, #ff00ff);
+        }
+
+        .question-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            color: #0a0a0a;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        .options {
+            display: grid;
+            gap: 0.8rem;
+        }
+
+        .option {
+            padding: 1rem 1.5rem;
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .option:hover {
+            background: rgba(0, 212, 255, 0.15);
+            border-color: rgba(0, 212, 255, 0.5);
+            transform: translateX(-5px);
+        }
+
+        .option.correct {
+            background: rgba(0, 255, 136, 0.2);
+            border-color: #00ff88;
+        }
+
+        .option.wrong {
+            background: rgba(255, 71, 87, 0.2);
+            border-color: #ff4757;
+        }
+
+        .option-letter {
+            width: 35px;
+            height: 35px;
+            background: rgba(0, 212, 255, 0.2);
+            border: 2px solid #00d4ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #00d4ff;
+            flex-shrink: 0;
+        }
+
+        .option.correct .option-letter {
+            background: #00ff88;
+            border-color: #00ff88;
+            color: #0a0a0a;
+        }
+
+        .option.wrong .option-letter {
+            background: #ff4757;
+            border-color: #ff4757;
+            color: #fff;
+        }
+
+        .feedback-message {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 10px;
+            font-weight: 600;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .feedback-message.correct {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid #00ff88;
+            color: #00ff88;
+        }
+
+        .feedback-message.wrong {
+            background: rgba(255, 71, 87, 0.1);
+            border: 1px solid #ff4757;
+            color: #ff4757;
+        }
+
+        .feedback-message.show {
+            display: block;
+        }
+
+        .next-btn {
+            margin-top: 1.5rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            border: none;
+            border-radius: 10px;
+            color: #0a0a0a;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            transition: all 0.3s ease;
+            width: 100%;
+            display: none;
+        }
+
+        .next-btn.show {
+            display: block;
+        }
+
+        .next-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+        }
+
+        /* Quiz Results */
+        .quiz-results {
+            text-align: center;
+            padding: 3rem;
+            background: linear-gradient(145deg, rgba(20, 20, 40, 0.9), rgba(10, 10, 30, 0.9));
+            border: 2px solid rgba(0, 212, 255, 0.5);
+            border-radius: 20px;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .quiz-results.show {
+            display: block;
+        }
+
+        .results-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #00d4ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .results-score {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00d4ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .results-message {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-bottom: 2rem;
+        }
+
+        .results-btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            border: none;
+            border-radius: 10px;
+            color: #0a0a0a;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+
+        .results-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+        }
+
+        .results-btn.secondary {
+            background: rgba(255, 0, 255, 0.2);
+            border: 2px solid #ff00ff;
+            color: #ff00ff;
+        }
+
+        .results-btn.secondary:hover {
+            background: rgba(255, 0, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(255, 0, 255, 0.3);
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #00d4ff;
+            border-radius: 50%;
+            animation: float 15s infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 1rem;
+            border-top: 2px solid rgba(0, 212, 255, 0.3);
+            margin-top: 3rem;
+            color: #666;
+            position: relative;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 212, 255, 0.05) 100%);
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00d4ff, #ff00ff, #00d4ff, transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        .creator-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 1rem 0;
+            position: relative;
+            display: inline-block;
+        }
+
+        .creator-name .fire-text {
+            background: linear-gradient(135deg, #ff6b35, #f7931e, #ffcc00, #ff6b35);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fireGlow 2s ease-in-out infinite alternate;
+            text-shadow: 0 0 10px rgba(255, 107, 53, 0.5),
+                         0 0 20px rgba(255, 107, 53, 0.3),
+                         0 0 30px rgba(255, 107, 53, 0.2);
+        }
+
+        @keyframes fireGlow {
+            0% {
+                background-position: 0% 50%;
+                filter: brightness(1);
+            }
+            100% {
+                background-position: 100% 50%;
+                filter: brightness(1.2);
+            }
+        }
+
+        .creator-name::before {
+            content: '🔥';
+            position: absolute;
+            right: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            animation: fireFlicker 0.5s ease-in-out infinite alternate;
+        }
+
+        .creator-name::after {
+            content: '🔥';
+            position: absolute;
+            left: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            animation: fireFlicker 0.5s ease-in-out infinite alternate-reverse;
+        }
+
+        @keyframes fireFlicker {
+            0% {
+                transform: translateY(-50%) scale(1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-50%) scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        .footer-sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ff6b35;
+            border-radius: 50%;
+            animation: sparkleRise 3s infinite;
+            opacity: 0;
+        }
+
+        @keyframes sparkleRise {
+            0% {
+                transform: translateY(100px) scale(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        footer a {
+            color: #00d4ff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .subtitle {
+                font-size: 0.9rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tab-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.2rem;
+            }
+
+            .card {
+                padding: 1.2rem;
+            }
+
+            .quiz-card {
+                padding: 1.5rem;
+            }
+
+            .question-text {
+                font-size: 1rem;
+            }
+
+            .password-card {
+                padding: 2rem;
+            }
+
+            .password-card h2 {
+                font-size: 1.4rem;
+            }
+
+            .creator-name {
+                font-size: 1.2rem;
+            }
+
+            .creator-name::before,
+            .creator-name::after {
+                font-size: 1rem;
+                right: -35px;
+                left: -35px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tabs {
+                gap: 0.3rem;
+            }
+
+            .tab-btn {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.8rem;
+            }
+
+            .quiz-progress {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .quiz-progress-bar {
+                margin: 0.5rem 0;
+            }
+
+            .creator-name {
+                font-size: 1rem;
+            }
+
+            .creator-name::before,
+            .creator-name::after {
+                font-size: 0.8rem;
+                right: -30px;
+                left: -30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Password Modal -->
+    <div class="password-modal" id="passwordModal">
+        <div class="password-card">
+            <div class="icon"><i class="fas fa-lock"></i></div>
+            <h2>تسجيل الدخول</h2>
+            <input type="password" class="password-input" id="passwordInput" placeholder="أدخل كلمة المرور">
+            <button class="password-btn" onclick="checkPassword()">
+                <i class="fas fa-sign-in-alt"></i> دخول
+            </button>
+            <p class="password-error" id="passwordError">كلمة المرور غير صحيحة</p>
+        </div>
+    </div>
+
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Header -->
+        <header>
+            <h1><i class="fas fa-chart-line"></i> ملخص الريادة والابتكار</h1>
+
+        </header>
+
+        <!-- Navigation Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('summary')">
+                <i class="fas fa-book-open"></i> الملخص
+            </button>
+            <button class="tab-btn" onclick="switchTab('quiz')">
+                <i class="fas fa-tasks"></i> الاختبار
+            </button>
+        </div>
+
+        <!-- Content Container -->
+        <div class="content-container">
+            <!-- Summary Tab -->
+            <div id="summary" class="tab-content active">
+                <!-- Unit 5 -->
+                <div class="section-header">
+                    <h2><i class="fas fa-lightbulb"></i> الوحدة الخامسة: تحليل الجدوى للمشروع</h2>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-clipboard-check"></i></div>
+                        <h3 class="card-title">تقييم الفكرة</h3>
+                        <div class="card-content">
+                            <p>عملية التأكد من وجود حاجة للفكرة في السوق، وتطوير حل لهذه الحاجة، وتحديد قدرة رائد الأعمال على تحويل الفكرة بنجاح.</p>
+                            <br>
+                            <strong>لوحة تصميم الأفكار (5 معايير):</strong>
+                            <ul>
+                                <li><strong>العملاء:</strong> من هم؟ ما حاجاتهم؟</li>
+                                <li><strong>العرض الجديد:</strong> وصف المنتج/الخدمة</li>
+                                <li><strong>عرض القيمة:</strong> لماذا يحتاج العميل المنتج؟</li>
+                                <li><strong>الكفاءات الأساسية:</strong> الميزات الفريدة</li>
+                                <li><strong>فريق العمل:</strong> المهارات اللازمة</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3 class="card-title">تحليل الجدوى (4 مكونات)</h3>
+                        <div class="card-content">
+                            <ul>
+                                <li><strong>جدوى الصناعة والسوق:</strong> جاذبية الصناعة وفرص نجاح المشروع</li>
+                                <li><strong>جدوى المنتج/الخدمة:</strong> هل يوجد سوق للمنتج؟</li>
+                                <li><strong>الجدوى المالية:</strong> الأرباح، رأس المال، التدفق النقدي، ROI</li>
+                                <li><strong>جدوى رائد الأعمال:</strong> المعرفة، الخبرة، المهارات</li>
+                            </ul>
+                            <br>
+                            <strong>القوى الكلية الست:</strong>
+                            <ul>
+                                <li>اجتماعية • تكنولوجية • ديموغرافية</li>
+                                <li>اقتصادية • سياسية وقانونية • عالمية</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-search"></i></div>
+                        <h3 class="card-title">البحث الأولي والثانوي</h3>
+                        <div class="card-content">
+                            <strong>البحث الأولي:</strong>
+                            <ul>
+                                <li>استبيانات واستفتاءات العملاء</li>
+                                <li>مجموعات التركيز (5-10 أشخاص)</li>
+                                <li>النماذج الأولية</li>
+                                <li>التجارب المنزلية</li>
+                            </ul>
+                            <br>
+                            <strong>البحث الثانوي:</strong>
+                            <ul>
+                                <li>الجمعيات التجارية ودليل الأعمال</li>
+                                <li>قواعد بيانات الصناعة</li>
+                                <li>البيانات الديموغرافية</li>
+                                <li>المقالات والدراسات</li>
+                                <li>الإنترنت</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-coins"></i></div>
+                        <h3 class="card-title">الجدوى المالية</h3>
+                        <div class="card-content">
+                            <strong>العناصر الأربعة:</strong>
+                            <ul>
+                                <li><strong>متطلبات رأس المال:</strong> المعدات، الموظفين، التسويق</li>
+                                <li><strong>الأرباح المقدرة:</strong> تقدير الأرباح المتوقعة</li>
+                                <li><strong>التدفق النقدي:</strong> السيولة الكافية</li>
+                                <li><strong>العائد على الاستثمار:</strong> ROI</li>
+                            </ul>
+                            <br>
+                            <strong>Bootstrapping:</strong> استغلال الموارد المحدودة والمتاحة بدل الاعتماد على التمويل الخارجي.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Unit 6 -->
+                <div class="section-header">
+                    <h2><i class="fas fa-cubes"></i> الوحدة السادسة: نموذج العمل التجاري</h2>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-sitemap"></i></div>
+                        <h3 class="card-title">العناصر التسعة لنموذج العمل</h3>
+                        <div class="card-content">
+                            <ol>
+                                <li><strong>شرائح العملاء:</strong> العملاء المستهدفون (B2C, B2B)</li>
+                                <li><strong>عرض القيمة:</strong> القيمة المقدمة للعميل</li>
+                                <li><strong>علاقات العملاء:</strong> كيفية التعامل مع العملاء</li>
+                                <li><strong>القنوات:</strong> كيفية وصول المنتج للعميل</li>
+                                <li><strong>الأنشطة الرئيسية:</strong> الإنتاج، التسويق، المبيعات</li>
+                                <li><strong>الموارد الرئيسية:</strong> البشرية، المالية، المعدات</li>
+                                <li><strong>الشركاء الرئيسيون:</strong> الموردون، الموزعون</li>
+                                <li><strong>هيكل التكلفة:</strong> إجمالي التكاليف</li>
+                                <li><strong>مصادر الدخل:</strong> من أين تأتي الأموال؟</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-gem"></i></div>
+                        <h3 class="card-title">عرض القيمة Canvas</h3>
+                        <div class="card-content">
+                            <strong>العميل:</strong>
+                            <ul>
+                                <li>Wants — الرغبات</li>
+                                <li>Needs — الاحتياجات</li>
+                                <li>Fears — المخاوف</li>
+                                <li>Substitutes — البدائل</li>
+                            </ul>
+                            <br>
+                            <strong>المنتج:</strong>
+                            <ul>
+                                <li>Benefits — الفوائد</li>
+                                <li>Features — الخصائص</li>
+                                <li>Experience — تجربة الاستخدام</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Unit 7 -->
+                <div class="section-header">
+                    <h2><i class="fas fa-chart-bar"></i> الوحدة السابعة: تحليل الصناعة والمنافسين</h2>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-balance-scale"></i></div>
+                        <h3 class="card-title">SWOT Analysis</h3>
+                        <div class="card-content">
+                            <p>تحليل البيئة الداخلية والخارجية</p>
+                            <br>
+                            <strong>داخلي:</strong>
+                            <ul>
+                                <li><strong>S</strong>trengths — نقاط القوة</li>
+                                <li><strong>W</strong>eaknesses — نقاط الضعف</li>
+                            </ul>
+                            <br>
+                            <strong>خارجي:</strong>
+                            <ul>
+                                <li><strong>O</strong>pportunities — الفرص</li>
+                                <li><strong>T</strong>hreats — التهديدات</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-globe"></i></div>
+                        <h3 class="card-title">PESTLE Analysis</h3>
+                        <div class="card-content">
+                            <p>تحليل البيئة الخارجية</p>
+                            <br>
+                            <ul>
+                                <li><strong>P</strong>olitical — سياسية</li>
+                                <li><strong>E</strong>conomic — اقتصادية</li>
+                                <li><strong>S</strong>ocial — اجتماعية</li>
+                                <li><strong>T</strong>echnological — تكنولوجية</li>
+                                <li><strong>E</strong>nvironmental — بيئية</li>
+                                <li><strong>L</strong>egal — قانونية</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-users"></i></div>
+                        <h3 class="card-title">أنواع المنافسين</h3>
+                        <div class="card-content">
+                            <ul>
+                                <li><strong>مباشر:</strong> يقدم نفس المنتج/الخدمة</li>
+                                <li><strong>غير مباشر:</strong> يلبي نفس الحاجة بمنتج مختلف</li>
+                                <li><strong>مستقبلي:</strong> قد يدخل السوق مستقبلاً</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-fist-raised"></i></div>
+                        <h3 class="card-title">قوى بورتر الخمس</h3>
+                        <div class="card-content">
+                            <ol>
+                                <li>تهديد المنافسين الجدد</li>
+                                <li>القدرة التفاوضية للموردين</li>
+                                <li>القدرة التفاوضية للمشترين</li>
+                                <li>تهديد المنتجات البديلة</li>
+                                <li>شدة المنافسة داخل القطاع</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Unit 8 -->
+                <div class="section-header">
+                    <h2><i class="fas fa-file-alt"></i> الوحدة الثامنة: خطة العمل</h2>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-list-ol"></i></div>
+                        <h3 class="card-title">مكونات خطة العمل (11 عنصر)</h3>
+                        <div class="card-content">
+                            <ol>
+                                <li>الملخص التنفيذي</li>
+                                <li>وصف الشركة</li>
+                                <li>بيان المهمة والرؤية</li>
+                                <li>التحليل البيئي والصناعي</li>
+                                <li>تحليل السوق</li>
+                                <li>خطة التسويق</li>
+                                <li>الهيكل التنظيمي</li>
+                                <li>الخطة التشغيلية</li>
+                                <li>خطة الإنتاج</li>
+                                <li>التوقعات المالية</li>
+                                <li>الملاحق</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-eye"></i></div>
+                        <h3 class="card-title">الرؤية vs المهمة</h3>
+                        <div class="card-content">
+                            <strong>Vision (الرؤية):</strong>
+                            <p>تصور لمستقبل ناجح تريد الشركة الوصول إليه</p>
+                            <br>
+                            <strong>Mission (المهمة):</strong>
+                            <p>بيان يحدد غرض العمل وسبب وجود الشركة</p>
+                            <br>
+                            <p><strong>الفرق:</strong> الرؤية = إلى أين نريد أن نصل؟ | المهمة = لماذا نحن موجودون؟</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                        <h3 class="card-title">أسباب فشل خطط الأعمال</h3>
+                        <div class="card-content">
+                            <ul>
+                                <li>الأهداف غير منطقية</li>
+                                <li>الأهداف غير قابلة للقياس</li>
+                                <li>عدم التزام صاحب المشروع</li>
+                                <li>عدم الخبرة في المجال</li>
+                                <li>عدم إدراك التهديدات ونقاط الضعف</li>
+                                <li>عدم تحديد حاجة العملاء</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Unit 9 -->
+                <div class="section-header">
+                    <h2><i class="fas fa-shield-alt"></i> الوحدة التاسعة: الملكية الفكرية</h2>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-certificate"></i></div>
+                        <h3 class="card-title">براءات الاختراع</h3>
+                        <div class="card-content">
+                            <strong>الشروط الثلاثة:</strong>
+                            <ul>
+                                <li>أن يكون الاختراع جديدًا</li>
+                                <li>وجود خطوة إبداعية</li>
+                                <li>قابل للتطبيق التجاري/الصناعي</li>
+                            </ul>
+                            <br>
+                            <strong>الحقوق:</strong>
+                            <ul>
+                                <li>الحق الحصري في صنع/استخدام/بيع الاختراع</li>
+                                <li>منع المنافسين من الاستخدام دون تصريح</li>
+                                <li>حماية لمدة 20 سنة</li>
+                            </ul>
+                            <br>
+                            <p><strong>الجهة المانحة في الأردن:</strong> قسم براءات الاختراع في وزارة الصناعة والتجارة</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-trademark"></i></div>
+                        <h3 class="card-title">أنواع الملكية الفكرية</h3>
+                        <div class="card-content">
+                            <ul>
+                                <li><strong>براءات الاختراع:</strong> حماية الاختراعات</li>
+                                <li><strong>العلامات التجارية:</strong> كلمة، رمز، شعار</li>
+                                <li><strong>حقوق التأليف:</strong> حماية الأعمال الأصلية ©</li>
+                                <li><strong>التصميم الصناعي:</strong> المظهر الجمالي للمنتج</li>
+                                <li><strong>المؤشر الجغرافي:</strong> منشأ جغرافي معين</li>
+                                <li><strong>الأسرار التجارية:</strong> معلومات سرية ذات قيمة</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-key"></i></div>
+                        <h3 class="card-title">شروط السر التجاري</h3>
+                        <div class="card-content">
+                            <ul>
+                                <li>أن تكون له قيمة تجارية</li>
+                                <li>أن يكون معلومًا لمجموعة صغيرة فقط</li>
+                                <li>أن يكون خاضعًا لخطوات معقولة للحفاظ على سريته</li>
+                            </ul>
+                            <br>
+                            <strong>أمثلة:</strong>
+                            <ul>
+                                <li>معلومات التصنيع</li>
+                                <li>بيانات الاختبارات</li>
+                                <li>التصاميم</li>
+                                <li>معلومات العملاء والموردين</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Unit 10 -->
+                <div class="section-header">
+                    <h2><i class="fas fa-cube"></i> الوحدة العاشرة: النموذج الأولي</h2>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-vial"></i></div>
+                        <h3 class="card-title">ما هو النموذج الأولي؟</h3>
+                        <div class="card-content">
+                            <p>نسخة نموذجية أو تجريبية من المنتج تستخدم لتقييمه قبل طرحه للعميل.</p>
+                            <br>
+                            <strong>لماذا؟ (4 أسباب)</strong>
+                            <ul>
+                                <li><strong>الفهم:</strong> فهم المشكلة واكتشاف الحلول</li>
+                                <li><strong>الاختبار والتحسين:</strong> اكتشاف الأخطاء وتحسين التصميم</li>
+                                <li><strong>التواصل:</strong> توصيل الفكرة بوضوح</li>
+                                <li><strong>الدفاع:</strong> الدفاع عن التصميم بالأدلة</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-layer-group"></i></div>
+                        <h3 class="card-title">أنواع النماذج الأولية (10)</h3>
+                        <div class="card-content">
+                            <ol>
+                                <li>Sketches and Diagrams — اسكتشات ورسوم</li>
+                                <li>3D Printing — طباعة ثلاثية الأبعاد</li>
+                                <li>Physical Model — نموذج مادي</li>
+                                <li>Wireframe — إطار سلكي</li>
+                                <li>VR Role-play — لعب أدوار افتراضي</li>
+                                <li>Feasibility Prototypes — نماذج الجدوى</li>
+                                <li>Working Model — نموذج عملي</li>
+                                <li>Video Prototype — نموذج بالفيديو</li>
+                                <li>Horizontal Prototype — نموذج أفقي</li>
+                                <li>Vertical Prototype — نموذج عمودي</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summary Comparison -->
+                <div class="section-header">
+                    <h2><i class="fas fa-exchange-alt"></i> مقارنات مهمة</h2>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-balance-scale"></i></div>
+                        <h3 class="card-title">SWOT vs PESTLE</h3>
+                        <div class="card-content">
+                            <p><strong>SWOT:</strong> داخلي + خارجي</p>
+                            <p><strong>PESTLE:</strong> خارجي فقط</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-search-dollar"></i></div>
+                        <h3 class="card-title">Primary vs Secondary Research</h3>
+                        <div class="card-content">
+                            <p><strong>الأولي:</strong> تجمع البيانات بنفسك</p>
+                            <p><strong>الثانوي:</strong> بيانات موجودة مسبقًا</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-project-diagram"></i></div>
+                        <h3 class="card-title">Business Model vs Business Plan</h3>
+                        <div class="card-content">
+                            <p><strong>Business Model:</strong> 9 عناصر، يشرح كيف يعمل المشروع</p>
+                            <p><strong>Business Plan:</strong> 11 قسم، وثيقة تخطيط مكتوبة</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Tab -->
+            <div id="quiz" class="tab-content">
+                <div class="quiz-results" id="quizResults">
+                    <div class="results-icon"><i class="fas fa-trophy"></i></div>
+                    <div class="results-score" id="finalScore">0/80</div>
+                    <p class="results-message" id="resultsMessage">أحسنت!</p>
+                    <button class="results-btn" onclick="restartQuiz()">
+                        <i class="fas fa-redo"></i> إعادة الاختبار
+                    </button>
+                    <button class="results-btn secondary" onclick="switchTab('summary')">
+                        <i class="fas fa-book-open"></i> العودة للملخص
+                    </button>
+                </div>
+
+                <div class="quiz-container" id="quizContainer">
+                    <div class="quiz-progress">
+                        <div class="quiz-progress-info">
+                            <span id="currentQuestion">1</span> / <span id="totalQuestions">80</span>
+                        </div>
+                        <div class="quiz-progress-bar">
+                            <div class="quiz-progress-fill" id="progressFill" style="width: 0%"></div>
+                        </div>
+                        <div class="quiz-score">
+                            <i class="fas fa-star"></i> <span id="currentScore">0</span>
+                        </div>
+                    </div>
+
+                    <div class="quiz-card" id="quizCard">
+                        <!-- Question will be loaded here -->
+                    </div>
+
+                    <button class="next-btn" id="nextBtn" onclick="nextQuestion()">
+                        <i class="fas fa-arrow-left"></i> السؤال التالي
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-sparkles" id="footerSparkles"></div>
+            <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">تم إنشاء هذا الملخص من قبل</p>
+            <div class="creator-name">
+                <span class="fire-text">رشا العمري</span>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Quiz Data
+        const quizData = [
+            // Unit 1-4: Idea and Feasibility
+            { question: "ما أول خطوة في عملية تخطيط الأعمال الجديدة؟", options: ["كتابة خطة العمل", "إطلاق المشروع", "تحديد الفرص وتوليد الأفكار", "تحليل المنافسين"], correct: 2 },
+            { question: "أي مما يلي يأتي بعد تقييم الأفكار؟", options: ["إطلاق المشروع", "إجراء تحليل الجدوى", "كتابة خطة التسويق", "تسجيل العلامة التجارية"], correct: 1 },
+            { question: "أي ترتيب يمثل خطوات عملية تخطيط الأعمال الجديدة بشكل صحيح؟", options: ["الفكرة → تقييم الأفكار → تحليل الجدوى → نموذج العمل → تحليل المنافسين → خطة العمل → الإطلاق", "الفكرة → خطة العمل → تحليل الجدوى → الإطلاق", "تحليل المنافسين → الفكرة → نموذج العمل → الإطلاق", "نموذج العمل → الفكرة → خطة العمل → تحليل الجدوى"], correct: 0 },
+            { question: "ما الهدف الأساسي من لوحة رسم وتصميم الأفكار؟", options: ["تحديد الضرائب", "اكتشاف الفجوات ونقاط الضعف في الفكرة", "تحديد رواتب الموظفين", "تسجيل الشركة قانونيًا"], correct: 1 },
+            { question: "كم عدد المعايير الرئيسية في لوحة تصميم الأفكار؟", options: ["3", "4", "5", "9"], correct: 2 },
+            { question: "أي مما يلي ليس من معايير لوحة تصميم الأفكار؟", options: ["العملاء", "عرض القيمة", "فريق العمل", "التوقعات المالية"], correct: 3 },
+            { question: "ماذا يقصد بالعملاء في لوحة تصميم الأفكار؟", options: ["الموظفون في الشركة", "الأشخاص الذين سيشترون المنتج أو يستفيدون من الخدمة", "المنافسون", "الموردون فقط"], correct: 1 },
+            { question: "ماذا يقصد بالعرض أو الطرح الجديد؟", options: ["وصف فكرة المنتج أو الخدمة وسماتها الرئيسية", "تحديد المنافسين فقط", "تحديد الضرائب", "تحديد رواتب العاملين"], correct: 0 },
+            { question: "ما المقصود بعرض القيمة؟", options: ["قيمة الشركة في البورصة", "أهمية المنتج للعميل وكيف سيلبي حاجاته", "تكلفة المنتج", "عدد موظفي الشركة"], correct: 1 },
+            { question: "الكفاءات الأساسية هي:", options: ["عدد الموظفين في الشركة", "الميزات الفريدة التي تميز العرض عن المنافسين", "أسعار المنتجات", "عدد العملاء"], correct: 1 },
+            { question: "يجب أن يمتلك فريق العمل:", options: ["رأس مال فقط", "المهارات اللازمة لتحويل الفكرة إلى مشروع", "منتجات منافسة", "علامة تجارية"], correct: 1 },
+            { question: "تحليل الجدوى يهدف إلى:", options: ["معرفة ما إذا كانت فكرة المشروع قابلة للاستمرار والنجاح", "اختيار شعار الشركة فقط", "تحديد لون المنتج", "اختيار اسم الموظف"], correct: 0 },
+            { question: "كم مكونًا رئيسيًا لتحليل الجدوى؟", options: ["2", "3", "4", "6"], correct: 2 },
+            { question: "أي مما يلي من مكونات تحليل الجدوى؟", options: ["جدوى الصناعة والسوق", "جدوى المنتج أو الخدمة", "الجدوى المالية", "جميع ما سبق"], correct: 3 },
+            { question: "أي مما يلي يمثل المكون الرابع لتحليل الجدوى؟", options: ["جدوى الإعلان", "جدوى رائد الأعمال", "جدوى المنافسين", "جدوى الموقع"], correct: 1 },
+            { question: "يركز تحليل جدوى الصناعة والسوق على:", options: ["جاذبية الصناعة وفرص نجاح المشروع فيها", "رواتب الموظفين", "تصميم الشعار", "نوع أجهزة الكمبيوتر"], correct: 0 },
+            { question: "ينقسم التركيز في مرحلة تحديد جدوى الصناعة إلى:", options: ["تحديد جاذبية الصناعة وتقييم الجوانب التي يمكن لشركة صغيرة احتلالها بشكل مربح", "تحديد الموظفين والعملاء", "تحديد المنتج والسعر فقط", "تحديد الضرائب فقط"], correct: 0 },
+            { question: "أي مما يلي يعتبر بحثًا أوليًا؟", options: ["قراءة تقرير قديم", "استخدام بيانات التعداد", "إجراء استبيان للعملاء", "قراءة مقال منشور"], correct: 2 },
+            { question: "أي مما يلي يعد من أدوات البحث الأولي؟", options: ["مجموعات التركيز", "الاستبيانات", "النماذج الأولية", "جميع ما سبق"], correct: 3 },
+            { question: "مجموعة التركيز Focus Group هي:", options: ["مجموعة من المنافسين", "مجموعة صغيرة من العملاء للحصول على آرائهم", "مجموعة من الموردين", "فريق الإدارة"], correct: 1 },
+            
+            // Unit 6: Business Model
+            { question: "نموذج العمل التجاري يوضح:", options: ["كيف يعمل المشروع ويقدم القيمة للعملاء", "قوانين الدولة", "رواتب الموظفين فقط", "الضرائب فقط"], correct: 0 },
+            { question: "أي مما يلي من مكونات نموذج العمل التجاري؟", options: ["شرائح العملاء", "عرض القيمة", "القنوات", "جميع ما سبق"], correct: 3 },
+            { question: "ماذا يقصد بشرائح العملاء؟", options: ["تقسيم العملاء المستهدفين إلى مجموعات", "تقسيم الموظفين", "تقسيم المنافسين", "تقسيم الموردين"], correct: 0 },
+            { question: "أي عنصر يجيب عن السؤال: 'ما القيمة التي سنقدمها للعميل؟'", options: ["القنوات", "عرض القيمة", "الموارد الرئيسية", "الشركاء"], correct: 1 },
+            { question: "أي عنصر يوضح كيفية وصول المنتج أو الخدمة إلى العميل؟", options: ["القنوات", "الأنشطة الرئيسية", "الموارد الرئيسية", "هيكل التكلفة"], correct: 0 },
+            { question: "أي عنصر يتعلق بكيفية تعامل الشركة مع العملاء؟", options: ["علاقات العملاء", "الموارد الرئيسية", "الشركاء الرئيسيون", "مصادر الدخل"], correct: 0 },
+            { question: "أي مما يلي يعتبر من الأنشطة الرئيسية؟", options: ["الإنتاج والتسويق وتقديم الخدمة", "لون الشعار", "اسم المدير", "عنوان الشركة فقط"], correct: 0 },
+            { question: "الموارد الرئيسية هي:", options: ["الموارد التي يحتاجها المشروع لتنفيذ أنشطته", "المنافسون", "العملاء فقط", "القوانين"], correct: 0 },
+            { question: "من أمثلة الشركاء الرئيسيين:", options: ["الموردون", "العملاء فقط", "الموظفون فقط", "المنافسون فقط"], correct: 0 },
+            { question: "أي عنصر يوضح التكاليف اللازمة لتشغيل نموذج العمل؟", options: ["مصادر الدخل", "هيكل التكلفة", "عرض القيمة", "القنوات"], correct: 1 },
+            { question: "أي عنصر يوضح من أين تحصل الشركة على الأموال؟", options: ["الموارد الرئيسية", "الأنشطة الرئيسية", "مصادر الدخل", "علاقات العملاء"], correct: 2 },
+            
+            // Unit 7: SWOT and PESTLE
+            { question: "تحليل SWOT يستخدم لتحليل:", options: ["البيئة الداخلية والخارجية", "البيئة الداخلية فقط", "البيئة الخارجية فقط", "الموارد البشرية فقط"], correct: 0 },
+            { question: "الحرف S في SWOT يعني:", options: ["Sales", "Strengths", "Services", "Strategy"], correct: 1 },
+            { question: "الحرف W في SWOT يعني:", options: ["Work", "Weaknesses", "World", "Wealth"], correct: 1 },
+            { question: "الحرف O في SWOT يعني:", options: ["Operations", "Opportunities", "Organization", "Objectives"], correct: 1 },
+            { question: "الحرف T في SWOT يعني:", options: ["Technology", "Training", "Threats", "Team"], correct: 2 },
+            { question: "أي مما يلي يعتبر نقطة قوة؟", options: ["براءة اختراع مميزة", "نقص الموارد", "تغير قانون سلبي", "منافس جديد"], correct: 0 },
+            { question: "أي مما يلي يعتبر نقطة ضعف؟", options: ["موارد بشرية مميزة", "براءة اختراع قوية", "نقص القدرات والإمكانيات", "اتفاقية جديدة"], correct: 2 },
+            { question: "أي مما يلي يعتبر فرصة؟", options: ["اتفاقية جديدة مع شركة أخرى", "ضعف الموارد", "تغير قانون سلبي", "مشكلة في التوزيع"], correct: 0 },
+            { question: "أي مما يلي يعتبر تهديدًا؟", options: ["ابتكار جديد", "اتفاقية جديدة", "تغيرات اقتصادية سلبية", "مورد جديد"], correct: 2 },
+            { question: "من فوائد تحليل SWOT:", options: ["التعرف على نقاط القوة", "اكتشاف الفرص", "دراسة التهديدات", "جميع ما سبق"], correct: 3 },
+            { question: "PESTLE يستخدم بشكل أساسي لتحليل:", options: ["البيئة الخارجية", "البيئة الداخلية فقط", "الموظفين", "المنتجات"], correct: 0 },
+            { question: "ماذا يعني الحرف P في PESTLE؟", options: ["Product", "Political", "People", "Planning"], correct: 1 },
+            { question: "ماذا يعني الحرف E الأول في PESTLE؟", options: ["Economic", "Environmental", "Employees", "Enterprise"], correct: 0 },
+            { question: "ماذا يعني الحرف S في PESTLE؟", options: ["Social", "Sales", "Strategy", "Security"], correct: 0 },
+            { question: "ماذا يعني الحرف T في PESTLE؟", options: ["Team", "Technology", "Trade", "Training"], correct: 1 },
+            { question: "ماذا يعني الحرف E الثاني في PESTLE؟", options: ["Economic", "Environmental", "Enterprise", "Education"], correct: 1 },
+            { question: "ماذا يعني الحرف L في PESTLE؟", options: ["Legal", "Labor", "Leadership", "Local"], correct: 0 },
+            
+            // Unit 7: Competitors and Porter's Five Forces
+            { question: "ما الهدف الأساسي من تحليل المنافسين؟", options: ["معرفة قدرة الشركة على المنافسة والحصول على ميزة مستدامة", "تحديد رواتب الموظفين", "تحديد الضرائب", "اختيار اسم الشركة"], correct: 0 },
+            { question: "المنافس المباشر هو الذي:", options: ["يقدم منتجًا مختلفًا تمامًا", "يقدم نفس المنتج أو الخدمة", "لا يعمل في السوق", "قد يدخل السوق مستقبلًا فقط"], correct: 1 },
+            { question: "المنافس غير المباشر هو الذي:", options: ["يقدم نفس المنتج", "يلبي نفس الحاجة من خلال منتج مختلف", "لا يقدم أي خدمة", "هو المورد"], correct: 1 },
+            { question: "المنافس المستقبلي هو:", options: ["شركة بدأت العمل منذ سنوات", "شركة قد تبدأ نشاطًا منافسًا في المستقبل", "العميل", "المورد"], correct: 1 },
+            { question: "تستخدم مصفوفة تحليل المنافسين من أجل:", options: ["مقارنة الشركة بالمنافسين", "حساب الرواتب", "تحديد الضرائب", "اختيار الموظفين"], correct: 0 },
+            { question: "يمكن أن تكون نتيجة المقارنة في مصفوفة المنافسين:", options: ["أفضل أو يساوي أو أقل", "كبير أو صغير فقط", "ربح أو خسارة فقط", "نعم أو لا فقط"], correct: 0 },
+            { question: "كم عدد قوى بورتر؟", options: ["3", "4", "5", "6"], correct: 2 },
+            { question: "أي مما يلي ليس من قوى بورتر الخمس؟", options: ["تهديد المنافسين الجدد", "القدرة التفاوضية للموردين", "القدرة التفاوضية للمشترين", "رضا الموظفين"], correct: 3 },
+            { question: "القدرة التفاوضية للموردين تعني:", options: ["قدرة الموردين على التأثير في الأسعار والجودة", "قدرة العملاء على تغيير المنتج", "قدرة الموظفين على الاستقالة", "قدرة الشركة على الإعلان"], correct: 0 },
+            { question: "عندما يقل عدد الموردين في السوق فإن قوتهم التفاوضية:", options: ["تقل", "تزداد", "تختفي", "لا تتغير دائمًا"], correct: 1 },
+            { question: "تكون الشركة في وضع أفضل عندما:", options: ["يوجد مورد واحد فقط", "يوجد عدد كبير من الموردين", "لا يوجد موردون", "يوجد منافس واحد"], correct: 1 },
+            { question: "تزداد القدرة التفاوضية للمشترين عندما:", options: ["يكون عدد المشترين قليلًا أو توجد لديهم بدائل كثيرة", "لا توجد بدائل", "يكون المنتج نادرًا جدًا", "لا يستطيع العملاء المقارنة"], correct: 0 },
+            { question: "تهديد المنتجات أو الخدمات البديلة يعني:", options: ["وجود منتجات تلبي حاجة مشابهة للعميل", "زيادة عدد الموظفين", "زيادة الموردين", "انخفاض الضرائب"], correct: 0 },
+            { question: "تكون شدة المنافسة مرتفعة عندما:", options: ["يوجد منافسون متقاربون في الحجم والقوة", "لا يوجد منافسون", "يكون السوق مغلقًا", "يكون عدد العملاء صفرًا"], correct: 0 },
+            
+            // Unit 8: Business Plan
+            { question: "خطة العمل هي:", options: ["وثيقة تخطيط للمشروع وأهدافه واستراتيجياته", "شعار الشركة", "قائمة الموظفين فقط", "عقد الإيجار"], correct: 0 },
+            { question: "أي مما يلي يعتبر من مكونات خطة العمل؟", options: ["الملخص التنفيذي", "وصف الشركة", "خطة التسويق", "جميع ما سبق"], correct: 3 },
+            { question: "الملخص التنفيذي يتضمن بشكل أساسي:", options: ["معلومات مختصرة ومهمة عن المشروع", "أسماء المنافسين فقط", "رواتب الموظفين", "تفاصيل الضرائب"], correct: 0 },
+            { question: "أي جزء من خطة العمل يتناول عمليات التصنيع والآلات والمعدات؟", options: ["خطة الإنتاج", "خطة التسويق", "الملخص التنفيذي", "تحليل السوق"], correct: 0 },
+            { question: "التوقعات المالية توضح:", options: ["قدرة الشركة على تحقيق الأرباح وسداد القروض وتحقيق العوائد", "لون المنتج", "عدد المنافسين فقط", "اسم الشركة"], correct: 0 },
+            { question: "ماذا تتضمن الملاحق؟", options: ["ملخص تحليل الجدوى وأبحاث السوق والسير الذاتية لفريق الإدارة", "شعار الشركة فقط", "أسماء المنافسين فقط", "أسعار المنتجات فقط"], correct: 0 },
+            { question: "الرؤية Vision هي:", options: ["تصور لمستقبل ناجح تريد الشركة الوصول إليه", "قائمة بالمصروفات", "قائمة بالموظفين", "عقد قانوني"], correct: 0 },
+            { question: "من فوائد الرؤية القوية:", options: ["تحديد اتجاه العمل", "المساعدة في اتخاذ القرارات", "إلهام وتحفيز الناس", "جميع ما سبق"], correct: 3 },
+            
+            // Unit 9: Intellectual Property
+            { question: "أي مما يلي يعتبر من أنواع الملكية الفكرية؟", options: ["براءة الاختراع", "العلامة التجارية", "حقوق التأليف والنشر", "جميع ما سبق"], correct: 3 },
+            { question: "براءة الاختراع تمنح صاحبها:", options: ["حقًا حصريًا في الاختراع وفق الحماية الممنوحة", "حقًا في جميع اختراعات العالم", "حقًا في منع كل المنافسين من العمل", "ملكية الشركة المنافسة"], correct: 0 },
+            { question: "من حقوق صاحب براءة الاختراع:", options: ["منع المنافس من صنع أو بيع الاختراع المحمي دون تصريح", "منع كل الشركات من العمل", "منع العملاء من شراء المنتجات", "إلغاء القوانين"], correct: 0 },
+            { question: "مدة حماية براءة الاختراع المذكورة في الملخص هي:", options: ["5 سنوات", "10 سنوات", "20 سنة", "50 سنة"], correct: 2 },
+            { question: "من يمنح براءات الاختراع في الأردن؟", options: ["وزارة التعليم العالي", "قسم براءات الاختراع في وزارة الصناعة والتجارة", "وزارة الصحة", "أمانة عمان"], correct: 1 },
+            { question: "المؤشر الجغرافي يستخدم للسلع التي:", options: ["لها منشأ جغرافي معين وسمات أو سمعة مرتبطة به", "لا يوجد لها مكان إنتاج", "تنتج في كل الدول", "لا تحمل اسمًا"], correct: 0 },
+            { question: "أي مما يلي شرط من شروط السر التجاري؟", options: ["أن تكون له قيمة تجارية", "أن يكون معروفًا للجميع", "ألا توجد أي محاولة لحمايته", "أن يكون منشورًا على الإنترنت"], correct: 0 },
+            
+            // Unit 10: Prototype
+            { question: "ما المقصود بالنموذج الأولي؟", options: ["نسخة نموذجية من المنتج تستخدم لتقييمه قبل طرحه للعميل", "المنتج النهائي دائمًا", "إعلان تجاري", "خطة مالية"], correct: 0 },
+            { question: "من أهداف عمل النموذج الأولي:", options: ["الفهم", "الاختبار والتحسين", "التواصل", "جميع ما سبق"], correct: 3 },
+            { question: "لماذا يستخدم رائد الأعمال النموذج الأولي قبل طرح المنتج؟", options: ["لاكتشاف المشكلات واختبار الفكرة وتحسينها", "لتجنب معرفة رأي العملاء", "لزيادة التكاليف فقط", "لإلغاء مرحلة الاختبار"], correct: 0 }
+        ];
+
+        // Quiz State
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let answered = false;
+
+        // Hash function using SHA-256
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const hash = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hash));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            return hashHex;
+        }
+
+        // Pre-computed password hash
+        const PASSWORD_HASH = '06febf97e784f4b583dbccd0ab670b2dcbc60398ee4f8cd4537e3d7babce2107';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            createFooterSparkles();
+            checkSavedPassword();
+            
+            // Add Enter key listener for password
+            document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    checkPassword();
+                }
+            });
+        });
+
+        // Create floating particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Create footer sparkles
+        function createFooterSparkles() {
+            const container = document.getElementById('footerSparkles');
+            if (!container) return;
+            
+            for (let i = 0; i < 20; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 3 + 's';
+                sparkle.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                sparkle.style.background = Math.random() > 0.5 ? '#ff6b35' : '#ffcc00';
+                container.appendChild(sparkle);
+            }
+        }
+
+        // Check saved password
+        function checkSavedPassword() {
+            const savedPassword = localStorage.getItem('sitePassword');
+            if (savedPassword === PASSWORD_HASH) {
+                showMainContent();
+            }
+        }
+
+        // Check password
+        async function checkPassword() {
+            const input = document.getElementById('passwordInput');
+            const error = document.getElementById('passwordError');
+            const password = input.value;
+
+            const hashedPassword = await hashPassword(password);
+
+            if (hashedPassword === PASSWORD_HASH) {
+                localStorage.setItem('sitePassword', hashedPassword);
+                showMainContent();
+            } else {
+                error.classList.add('show');
+                input.value = '';
+                input.focus();
+                
+                setTimeout(() => {
+                    error.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        // Show main content
+        function showMainContent() {
+            document.getElementById('passwordModal').classList.add('hidden');
+            document.getElementById('mainContent').classList.add('show');
+            loadQuestion();
+        }
+
+        // Tab switching
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.getElementById(tabId).classList.add('active');
+            event.target.closest('.tab-btn').classList.add('active');
+
+            if (tabId === 'quiz') {
+                if (currentQuestionIndex >= quizData.length) {
+                    showResults();
+                } else {
+                    loadQuestion();
+                }
+            }
+        }
+
+        // Load question
+        function loadQuestion() {
+            if (currentQuestionIndex >= quizData.length) {
+                showResults();
+                return;
+            }
+
+            const question = quizData[currentQuestionIndex];
+            const card = document.getElementById('quizCard');
+            
+            card.innerHTML = `
+                <span class="question-number">سؤال ${currentQuestionIndex + 1}</span>
+                <p class="question-text">${question.question}</p>
+                <div class="options">
+                    ${question.options.map((opt, i) => `
+                        <div class="option" onclick="selectOption(${i})">
+                            <span class="option-letter">${String.fromCharCode(65 + i)}</span>
+                            <span>${opt}</span>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="feedback-message" id="feedbackMessage"></div>
+            `;
+
+            // Update progress
+            document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+            document.getElementById('totalQuestions').textContent = quizData.length;
+            document.getElementById('progressFill').style.width = ((currentQuestionIndex) / quizData.length * 100) + '%';
+            document.getElementById('currentScore').textContent = score;
+
+            answered = false;
+            document.getElementById('nextBtn').classList.remove('show');
+        }
+
+        // Select option
+        function selectOption(optionIndex) {
+            if (answered) return;
+            answered = true;
+
+            const question = quizData[currentQuestionIndex];
+            const options = document.querySelectorAll('.option');
+            const feedback = document.getElementById('feedbackMessage');
+
+            options.forEach((opt, i) => {
+                opt.style.pointerEvents = 'none';
+                if (i === question.correct) {
+                    opt.classList.add('correct');
+                } else if (i === optionIndex && optionIndex !== question.correct) {
+                    opt.classList.add('wrong');
+                }
+            });
+
+            if (optionIndex === question.correct) {
+                score++;
+                feedback.textContent = 'إجابة صحيحة! أحسنت';
+                feedback.className = 'feedback-message correct show';
+            } else {
+                feedback.textContent = 'إجابة خاطئة';
+                feedback.className = 'feedback-message wrong show';
+            }
+
+            document.getElementById('currentScore').textContent = score;
+            document.getElementById('nextBtn').classList.add('show');
+        }
+
+        // Next question
+        function nextQuestion() {
+            currentQuestionIndex++;
+            loadQuestion();
+        }
+
+        // Show results
+        function showResults() {
+            document.getElementById('quizContainer').style.display = 'none';
+            document.getElementById('quizResults').classList.add('show');
+            
+            const finalScore = document.getElementById('finalScore');
+            const message = document.getElementById('resultsMessage');
+            
+            finalScore.textContent = `${score}/${quizData.length}`;
+            
+            const percentage = (score / quizData.length) * 100;
+            if (percentage >= 90) {
+                message.textContent = 'ممتاز! أداء رائع';
+            } else if (percentage >= 75) {
+                message.textContent = 'جيد جدًا! استمر في التفوق';
+            } else if (percentage >= 60) {
+                message.textContent = 'جيد! يمكنك التحسن أكثر';
+            } else if (percentage >= 50) {
+                message.textContent = 'مقبول! راجع الملخص مرة أخرى';
+            } else {
+                message.textContent = 'تحتاج إلى مراجعة أكبر للملخص';
+            }
+        }
+
+        // Restart quiz
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            answered = false;
+            
+            document.getElementById('quizResults').classList.remove('show');
+            document.getElementById('quizContainer').style.display = 'block';
+            loadQuestion();
+        }
+    </script>
+</body>
+</html>
